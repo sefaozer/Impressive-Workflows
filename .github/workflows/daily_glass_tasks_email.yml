@@ -1,0 +1,31 @@
+name: Daily Glass Tasks Email
+
+on:
+  schedule:
+    - cron: '0 12 * * *' # Her gün saat 12:00'de çalıştır. Everyday 12:00
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests
+
+    - name: Send Glass tasks email
+      run: python ./.github/scripts/send_glass_tasks_email.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_RECIPIENT: ${{ secrets.EMAIL_RECIPIENT }}
