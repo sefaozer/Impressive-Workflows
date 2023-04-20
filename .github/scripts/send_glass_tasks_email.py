@@ -15,34 +15,25 @@ def get_glass_tasks():
     }
 
     projects = requests.get(url, headers=headers).json()
-
+    print("GitHub API Response:", projects)
     glass_project = next((project for project in projects if project["name"] == "Glass"), None)
     
     if glass_project is None:
         return "No Glass project found."
 
-    tasks_url = glass_project["columns_url"]
-    columns = requests.get(tasks_url, headers=headers).json()
-    
-    # Örnek olarak, projenizin "To Do" adında bir sütunu olduğunu varsayalım
-    todo_column = next((column for column in columns if column["name"] == "To Do"), None)
-    
-    if todo_column is None:
-        return "No To Do column found."
-    
-    cards_url = todo_column["cards_url"]
-    cards = requests.get(cards_url, headers=headers).json()
+    tasks_url = glass_project["cards_url"]
+    tasks = requests.get(tasks_url, headers=headers).json()
 
     task_list = []
-    for card in cards:
-        task_list.append(card["note"])
+    for task in tasks:
+        task_list.append(task["note"])
 
     return "\n".join(task_list)
 
 def send_email(task_list):
-    email_username ='alicemozkara'#os.environ["EMAIL_USERNAME"]
-    email_password = ':Alicem.ozkara1995'#os.environ["EMAIL_PASSWORD"]
-    email_recipient ='alicemozkara@gmail.com'# os.environ["EMAIL_RECIPIENT"]
+    email_username =os.environ["EMAIL_USERNAME"]
+    email_password = os.environ["EMAIL_PASSWORD"]
+    email_recipient = os.environ["EMAIL_RECIPIENT"]
 
     msg = EmailMessage()
     msg.set_content(f"Here are your daily Glass tasks:\n\n{task_list}")
