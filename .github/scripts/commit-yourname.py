@@ -43,9 +43,12 @@ def set_date(date):
     date_cmd = f'date -s "{date}"'
     os.system(date_cmd)
 
-def make_commit():
-    commit_cmd = 'git commit --allow-empty -m "dummy commit"'
+def make_commit(commit_date_str):
+    commit_cmd = f'git commit --allow-empty -m "dummy commit" --date="{commit_date_str}"'
     subprocess.run(commit_cmd, shell=True)
+
+
+
 
 def write_name(name, start_date, commit_every_n_days=2):
     name = name.upper()
@@ -58,7 +61,7 @@ def write_name(name, start_date, commit_every_n_days=2):
         for row in letter_pattern:
             for column in row:
                 if column == '1':
-                    make_commit()
+                    make_commit(current_date)
                 current_date += timedelta(days=commit_every_n_days)
                 os.environ['GIT_COMMITTER_DATE'] = current_date.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -69,7 +72,7 @@ def write_name(name, start_date, commit_every_n_days=2):
         os.environ['GIT_COMMITTER_DATE'] = current_date.strftime("%Y-%m-%d %H:%M:%S")
 
 # Set Name and Starting Date
-name = "Ali Cem"  # Set Name
+name = "sefa"  # Set Name
 start_date = datetime(year=2021, month=1, day=1)  # Set Starting Date
 
 
