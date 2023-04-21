@@ -43,10 +43,21 @@ def get_project_columns_and_cards(project_id):
  query {{
       node(id: "{project_id}") {{
         ... on ProjectV2 {{
-            items(first:1) {{
+            items(first:100) {{
                 nodes{{
-                    id
-                    
+                    fieldValues(first: 4){{
+                    nodes{{
+                    ... on ProjectV2ItemFieldTextValue {{
+                    text
+                    field{{
+                    ... on ProjectV2FieldCommon {{
+                    name
+                    }}
+                    }}
+                    }}
+                                        }}
+                    }}
+                
                     
                 }}
             }}
@@ -87,13 +98,24 @@ def send_github_notification(task_list):
     else:
         print(f"Error creating GitHub notification: {response.status_code} - {response.text}")
 
-if __name__ == "__main__":
-    user = "alicemist"
-    project_number = 3
+def get_last_three_tasks(user, project_number):
     project = get_user_project(user, project_number)
     
     project_id = project["data"]["user"]["projectV2"]["id"]
     task = get_project_columns_and_cards(project_id)
-    tasklist = task["data"]
-    print(tasklist)
-    
+    task_list = []
+
+    for item in task["data"]["node"]["items"]["nodes"]:
+        
+        for field_value in item["fieldValues"]["nodes"]:
+            
+            if "text" in field_value:
+                task_list.append(field_value["text"])
+
+    return task_list[-3:]
+
+if __name__ == "__main__":
+    user = "alicemist"
+    project_number = 3
+    last_three_tasks = get_last_three_tasks(user, project_number)
+    print(last_three_tasks)
