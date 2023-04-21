@@ -72,7 +72,7 @@ def write_name(name, start_date, commit_every_n_days=2):
         os.environ['GIT_COMMITTER_DATE'] = current_date.strftime("%Y-%m-%d %H:%M:%S")
 
 # Set Name and Starting Date
-name = "sefa"  # Set Name
+name = "a"  # Set Name
 start_date = datetime(year=2021, month=1, day=1)  # Set Starting Date
 
 
