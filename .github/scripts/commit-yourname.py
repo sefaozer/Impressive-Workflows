@@ -12,8 +12,8 @@ def make_commit(commit_date_str):
     subprocess.run(commit_cmd, shell=True)
 # Başlangıç ve Bitiş Tarihleri
 
-start_date_str = "2022-01-01"
-end_date_str = "2022-10-01"
+start_date_str = "2022-02-01"
+end_date_str = "2022-3-01"
 
 start_date = datetime.datetime.strptime(start_date_str, "%Y-%m-%d")
 end_date = datetime.datetime.strptime(end_date_str, "%Y-%m-%d")
@@ -21,7 +21,7 @@ end_date = datetime.datetime.strptime(end_date_str, "%Y-%m-%d")
 # Her gün için rastgele commit sayısı ve tarihleri belirleme
 for i in range((end_date - start_date).days + 1):
     commit_date = start_date + datetime.timedelta(days=i)
-    commit_count = random.randint(10, 25)
+    commit_count = random.randint(0, 7)
     rand=random.randint(0,1) # her gün için 10-25 arası rastgele commit sayısı belirleme
     print(commit_count*rand)
     print(i)
