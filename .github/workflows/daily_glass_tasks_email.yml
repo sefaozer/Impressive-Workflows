@@ -26,4 +26,4 @@ jobs:
         run: |
           python .github/scripts/send_glass_tasks_email.py
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.metrics }}
