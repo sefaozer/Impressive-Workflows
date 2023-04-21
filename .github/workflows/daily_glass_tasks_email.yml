@@ -1,6 +1,7 @@
 name: Send Glass Tasks Email
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *' # Runs every day at 00:00 UTC
 
