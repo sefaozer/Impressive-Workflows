@@ -3,10 +3,10 @@ import os
 
 import requests
 
-from email.message import EmailMessage
+
 
 def get_user_project(user, project_number):
-    token = os.environ["GITHUB_TOKEN"]
+    token = os.environ["metrics"]
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ def get_user_project(user, project_number):
     return data
 
 def get_project_columns_and_cards(project_id):
-    token = os.environ["GITHUB_TOKEN"]
+    token = os.environ["metrics"]
     headers = {
         "Authorization": f"Bearer {token}",
         "Content-Type": "application/json",
@@ -78,7 +78,7 @@ def get_project_columns_and_cards(project_id):
 def send_github_notification(task_list):
     user = "alicemist"
     repo = "alicemist"
-    token = os.environ["GITHUB_TOKEN"]
+    token = os.environ["metrics"]
 
     issue_title = "Your Daily Glass Tasks"
     issue_body = f"Here are your daily Glass tasks:\n\n{task_list}"
@@ -117,7 +117,6 @@ def get_last_three_tasks(user, project_number):
 if __name__ == "__main__":
     user = "alicemist"
     project_number = 3
-    token = os.environ["GITHUB_TOKEN"]
-    print (token)
-    #last_three_tasks = get_last_three_tasks(user, project_number)
-    #print(last_three_tasks)
+    
+    last_three_tasks = get_last_three_tasks(user, project_number)
+    print(last_three_tasks)
