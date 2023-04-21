@@ -117,5 +117,7 @@ def get_last_three_tasks(user, project_number):
 if __name__ == "__main__":
     user = "alicemist"
     project_number = 3
-    last_three_tasks = get_last_three_tasks(user, project_number)
-    print(last_three_tasks)
+    project = get_user_project(user, project_number)
+    print (project)
+    #last_three_tasks = get_last_three_tasks(user, project_number)
+    #print(last_three_tasks)
