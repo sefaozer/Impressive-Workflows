@@ -1,9 +1,5 @@
 name: Test1
 
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 12 * * *' # Runs every day at 00:00 UTC
 
 jobs:
   build:
