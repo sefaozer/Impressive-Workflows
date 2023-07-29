@@ -7,8 +7,8 @@ def random_date(start_date, end_date):
         seconds=random.randint(0, int((end_date - start_date).total_seconds())),
     )
 
-start_date = datetime(2023, 6, 8)
-end_date = datetime(2023, 6, 10)
+start_date = datetime(2023, 6, 10)
+end_date = datetime(2023, 6, 12)
 
 commit_count = 10  # Change this number as needed
 
