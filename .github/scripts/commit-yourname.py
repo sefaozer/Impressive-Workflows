@@ -12,8 +12,8 @@ def make_commit(commit_date_str):
     subprocess.run(commit_cmd, shell=True)
 # Başlangıç ve Bitiş Tarihleri
 
-start_date_str = "2023-02-01"
-end_date_str = "2023-03-20"
+start_date_str = "2023-05-01"
+end_date_str = "2023-06-20"
 
 start_date = datetime.datetime.strptime(start_date_str, "%Y-%m-%d")
 end_date = datetime.datetime.strptime(end_date_str, "%Y-%m-%d")
